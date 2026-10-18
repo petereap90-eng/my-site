@@ -17,17 +17,9 @@
     <p class="lede" id="count"></p>
 
     <div id="list"></div>
-
-    <footer>Ratings are out of 5.</footer>
   </div>
 
   <script>
-    function stars(r) {
-      const full = Math.floor(r);
-      const half = r - full >= 0.5;
-      return "★".repeat(full) + (half ? "½" : "");
-    }
-
     function fmt(d) {
       const [y, m, day] = d.split("-").map(Number);
       return new Date(y, m - 1, day).toLocaleDateString("en-US", {
@@ -60,9 +52,7 @@
           const title = el("div", "title", m.title + " ");
           title.appendChild(el("span", "year", "(" + m.year + ")"));
           row.appendChild(title);
-          row.appendChild(el("div", "stars", m.rating ? stars(m.rating) : ""));
           row.appendChild(el("div", "meta", "watched " + fmt(m.watched)));
-          if (m.note) row.appendChild(el("p", "note", m.note));
           list.appendChild(row);
         });
       })
