@@ -30,7 +30,8 @@
     fetch("movies.json")
       .then(r => r.json())
       .then(movies => {
-        movies.sort((a, b) => (b.watched || "").localeCompare(a.watched || ""));
+        const key = t => t.replace(/^(the|a|an)\s+/i, "");
+        movies.sort((a, b) => key(a.title).localeCompare(key(b.title)));
         document.getElementById("count").textContent =
           movies.length + (movies.length === 1 ? " film logged." : " films logged.");
 
