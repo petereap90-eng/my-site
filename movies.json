@@ -1,0 +1,16 @@
+[
+  {
+    "title": "Heat",
+    "year": 1995,
+    "watched": "2026-10-12",
+    "rating": 4.5,
+    "note": "Example entry. Replace or delete me."
+  },
+  {
+    "title": "Paddington 2",
+    "year": 2017,
+    "watched": "2026-10-03",
+    "rating": 5,
+    "note": "Example entry. Replace or delete me."
+  }
+]
