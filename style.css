@@ -84,19 +84,11 @@ a { color: var(--accent); }
 
 /* movies */
 .film {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px 16px;
   padding: 16px 0;
   border-bottom: 1px solid var(--line);
-}
-.film .poster {
-  width: 52px;
-  aspect-ratio: 2 / 3;
-  object-fit: cover;
-  border-radius: 3px;
-  background: var(--line);
-  flex-shrink: 0;
 }
 .film .title { font-size: 1.1rem; }
 .film .year { color: var(--muted); }
