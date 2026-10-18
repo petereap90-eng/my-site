@@ -27,6 +27,29 @@
       return e;
     }
 
+    // Free TMDB API key (v3). Paste it between the quotes.
+    const TMDB_KEY = "";
+
+    function posterFor(m) {
+      const cacheKey = "poster:" + m.title + ":" + m.year;
+      try {
+        const hit = localStorage.getItem(cacheKey);
+        if (hit) return Promise.resolve(hit);
+      } catch (e) {}
+      const url = "https://api.themoviedb.org/3/search/movie?api_key=" + TMDB_KEY +
+        "&query=" + encodeURIComponent(m.title) + "&year=" + m.year;
+      return fetch(url)
+        .then(r => r.json())
+        .then(d => {
+          const path = d.results && d.results[0] && d.results[0].poster_path;
+          if (!path) return null;
+          const full = "https://image.tmdb.org/t/p/w185" + path;
+          try { localStorage.setItem(cacheKey, full); } catch (e) {}
+          return full;
+        })
+        .catch(() => null);
+    }
+
     fetch("movies.json")
       .then(r => r.json())
       .then(movies => {
@@ -42,6 +65,15 @@
 
         movies.forEach(m => {
           const row = el("div", "film");
+          if (TMDB_KEY) {
+            const img = el("img", "poster");
+            img.alt = m.title + " poster";
+            img.loading = "lazy";
+            row.appendChild(img);
+            posterFor(m).then(src => {
+              if (src) img.src = src; else img.remove();
+            });
+          }
           const title = el("div", "title", m.title + " ");
           title.appendChild(el("span", "year", "(" + m.year + ")"));
           row.appendChild(title);
