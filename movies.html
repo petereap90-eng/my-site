@@ -31,7 +31,7 @@
     const TMDB_KEY = "c37c85cdf224f046aa2466c17912355e";
 
     function posterFor(m) {
-      const cacheKey = "poster2:" + m.title + ":" + m.year;
+      const cacheKey = "poster3:" + m.title + ":" + m.year;
       try {
         const hit = localStorage.getItem(cacheKey);
         if (hit) return Promise.resolve(hit);
@@ -43,7 +43,7 @@
         .then(d => {
           const path = d.results && d.results[0] && d.results[0].poster_path;
           if (!path) return null;
-          const full = "https://image.tmdb.org/t/p/w342" + path;
+          const full = "https://image.tmdb.org/t/p/original" + path;
           try { localStorage.setItem(cacheKey, full); } catch (e) {}
           return full;
         })

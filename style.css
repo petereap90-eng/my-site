@@ -91,7 +91,7 @@ a { color: var(--accent); }
   border-bottom: 1px solid var(--line);
 }
 .film .poster {
-  width: 60px;
+  width: 44px;
   aspect-ratio: 2 / 3;
   object-fit: cover;
   border-radius: 3px;
