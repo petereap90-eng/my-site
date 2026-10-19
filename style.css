@@ -65,6 +65,8 @@ h2 {
   margin: 48px 0 14px;
 }
 
+h1 + h2 { margin-top: 20px; }
+
 p { margin: 0 0 16px; }
 a { color: var(--accent); }
 
