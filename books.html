@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Books Read</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <nav>
+      <a href="index.html">home</a>
+      <a href="movies.html">Films Watched</a>
+      <a class="here" href="books.html">Books Read</a>
+    </nav>
+
+    <h1>Books Read</h1>
+    <p class="lede" id="count"></p>
+
+    <div id="list"></div>
+  </div>
+
+  <script>
+    function el(tag, cls, text) {
+      const e = document.createElement(tag);
+      if (cls) e.className = cls;
+      if (text !== undefined) e.textContent = text;
+      return e;
+    }
+
+    fetch("books.json")
+      .then(r => r.json())
+      .then(books => {
+        const key = t => t.replace(/^(the|a|an)\s+/i, "");
+        books.sort((a, b) => key(a.title).localeCompare(key(b.title)));
+        document.getElementById("count").textContent =
+          books.length + (books.length === 1 ? " book logged." : " books logged.");
+
+        const list = document.getElementById("list");
+        if (!books.length) {
+          list.appendChild(el("p", "empty", "Nothing here yet."));
+          return;
+        }
+
+        books.forEach(m => {
+          const row = el("div", "film book");
+          const title = el("div", "title", m.title + " ");
+          title.appendChild(el("span", "year", "(" + m.year + ")"));
+          row.appendChild(title);
+          row.appendChild(el("div", "author", m.author));
+          list.appendChild(row);
+        });
+      })
+      .catch(() => {
+        document.getElementById("list").appendChild(
+          el("p", "empty", "Couldn't load the list.")
+        );
+      });
+  </script>
+</body>
+</html>

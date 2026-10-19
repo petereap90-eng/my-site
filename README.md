@@ -16,6 +16,18 @@ Open `movies.json`, add an entry, save. Use a comma between entries.
 
 Dates must be YYYY-MM-DD. Ratings can be 0.5 steps (3.5, 4, 4.5). The page sorts newest first by itself.
 
+## Add a book
+
+Open `books.json`, add an entry, save. Use a comma between entries.
+
+    {
+      "title": "Book Title",
+      "author": "Author Name",
+      "year": 2020
+    }
+
+The page sorts alphabetically by title by itself.
+
 ## Preview locally
 
     python3 -m http.server

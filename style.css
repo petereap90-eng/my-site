@@ -92,6 +92,12 @@ a { color: var(--accent); }
 }
 .film .title { font-size: 1.1rem; }
 .film .year { color: var(--muted); }
+.film .author { color: var(--muted); text-align: right; font-size: 0.95rem; }
+
+@media (max-width: 520px) {
+  .film.book { grid-template-columns: 1fr; }
+  .film .author { text-align: left; }
+}
 
 .empty { color: var(--muted); font-style: italic; }
 
